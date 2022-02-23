@@ -1,9 +1,9 @@
 module.exports = function toReadable (number) {
     
-    let start = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
+    let start = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve'];
     let ones = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
     let tens = ['thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
-    let others = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
+    let others = ['twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
 
 
     numString = number.toString();
@@ -16,7 +16,7 @@ if (number === 0) {
     return 'zero';
 }
 
-if (number < 12) {
+if (0 < number <= 12) {
   return start[number];
 }
 
@@ -25,14 +25,14 @@ if (13 <= number <= 19) {
   }
 
 if (numString.length === 2 && number > 19) {
-  return others[numString[0]] + ' ' + start[numString[1]];
+  return others[numString[0]] + ' ' + ones[numString[1]];
 }
 
 if (numString.length == 3) {
   if (numString[1] === '0' && numString[2] === '0') {
     return ones[numString[0]] + ' hundred';}
   else {
-    return ones[numString[0]] + ' hundred and ' + convert(+(numString[1] + numString[2]));}
+    return ones[numString[0]] + ' hundred and ' + others[numString[1]] + ones[numString[2]];}
 }
 
 if (numString.length === 4) {
