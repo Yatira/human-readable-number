@@ -51,11 +51,5 @@ module.exports = function toReadable(number) {
     if (number % 10 === 0)
         return reading[0][number[0]] + " hundred " + reading[2][number[1]];
     if (number < 1000)
-        return (
-            reading[0][number[0]] +
-            " hundred " +
-            reading[2][number[1]] +
-            " " +
-            reading[0][number[2]]
-        );
+        return (reading[0][number[0]] + " hundred " + reading[2][number[1]] + " " + reading[0][number[2]]);
 };
