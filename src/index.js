@@ -6,34 +6,31 @@ module.exports = function toReadable (number) {
     let others = ['twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
 
 
-    numString = number.toString();
+   let numString = number.toString();
 
-if (number < 0) {
+if (number < 0) 
     throw new Error('Negative numbers are not supported.');
-}
-
-if (number === 0) {
+if (number === 0) 
     return 'zero';
-}
 
-if (0 < number <= 12) {
+if (0 < number <= 12) 
   return start[number];
-}
 
-if (13 <= number <= 19) {
+
+if (13 <= number <= 19) 
     return tens[number];
-  }
+ 
 
-if (numString.length === 2 && number > 19) {
+if (numString.length === 2 && number > 19) 
   return others[numString[0]] + ' ' + ones[numString[1]];
-}
+
 
 if (numString.length == 3) {
-  if (numString[1] === '0' && numString[2] === '0') {
-    return ones[numString[0]] + ' hundred';}
-  else {
+  if (numString[1] === '0' && numString[2] === '0') 
+    return ones[numString[0]] + ' hundred';
+  else 
     return ones[numString[0]] + ' hundred and ' + others[numString[1]] + ones[numString[2]];}
-}
+
 
 if (numString.length === 4) {
   let end = +(numString[1] + numString[2] + numString[3]);
