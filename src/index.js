@@ -1,44 +1,61 @@
-module.exports = function toReadable (number) {
-    
-    let start = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve'];
-    let ones = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
-    let tens = ['thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
-    let others = ['twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
+module.exports = function toReadable(number) {
+    let reading = [
+        {
+            0: "",
+            1: "one",
+            2: "two",
+            3: "three",
+            4: "four",
+            5: "five",
+            6: "six",
+            7: "seven",
+            8: "eight",
+            9: "nine",
+        },
+        {
+            10: "ten",
+            11: "eleven",
+            12: "twelve",
+            13: "thirteen",
+            14: "fourteen",
+            15: "fifteen",
+            16: "sixteen",
+            17: "seventeen",
+            18: "eighteen",
+            19: "nineteen",
+        },
+        {
+            2: "twenty",
+            3: "thirty",
+            4: "forty",
+            5: "fifty",
+            6: "sixty",
+            7: "seventy",
+            8: "eighty",
+            9: "ninety",
+        },
+    ];
 
+    number = number.toString();
 
-   let numString = number.toString();
-
-if (number < 0) 
-    throw new Error('Negative numbers are not supported.');
-if (number === 0) 
-    return 'zero';
-
-if (0 < number <= 12) 
-  return start[number];
-
-
-if (13 <= number <= 19) 
-    return tens[number];
- 
-
-if (numString.length === 2 && number > 19) 
-  return others[numString[0]] + ' ' + ones[numString[1]];
-
-
-if (numString.length == 3) {
-  if (numString[1] === '0' && numString[2] === '0') 
-    return ones[numString[0]] + ' hundred';
-  else 
-    return ones[numString[0]] + ' hundred and ' + others[numString[1]] + ones[numString[2]];}
-
-
-if (numString.length === 4) {
-  let end = +(numString[1] + numString[2] + numString[3]);
-  if (end === 0) {
-    return ones[numString[0]] + ' thousand';}
-  if (end < 100) {
-    return start[numString[0]] + ' thousand and ' + convert(end);}
-  else {
-    return start[numString[0]] + ' thousand ' + convert(end);}
-}
-} 
+    if (number < 1) return "zero";
+    if (number < 10) return reading[0][number];
+    if (number < 20) return reading[1][number];
+    if (number < 100 && number % 10 === 0) return reading[2][number[0]];
+    if (number < 100) return reading[2][number[0]] + " " + reading[0][number[1]];
+    if (number % 100 === 0) return reading[0][number[0]] + " hundred";
+    if (number % 100 > 0 && number % 100 < 10)
+        return reading[0][number[0]] + " hundred " + reading[0][number % 100];
+    if (number % 100 > 0 && number % 100 < 20)
+        return reading[0][number[0]] + " hundred " + reading[1][number % 100];
+    if (number % 10 === 0)
+        return reading[0][number[0]] + " hundred " + reading[2][number[1]];
+    if (number < 1000)
+        return (
+            reading[0][number[0]] +
+            " hundred " +
+            reading[2][number[1]] +
+            " " +
+            reading[0][number[2]]
+        );
+};
